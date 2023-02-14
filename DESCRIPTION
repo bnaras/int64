@@ -1,13 +1,22 @@
 Package: int64
 Type: Package
-Title: 64 bit integer types
+Title: 64-Bit Integer Types
 Version: 1.2
 Date: 2023-02-13
 Authors@R: c(person("Romain", "Francois", role=c("aut", "cph"),
-	   	   email = "romain@rstudio.com"),
+	   	   email = "romain@rstudio.com", comment = "Sponsored by the Google Open Source Programs Office"),
              person("Balasubramanian", "Narasimhan", role=c("aut", "cre"),
 	   	   email = "naras@stanford.edu"))
-Description: 64 bit integer types
+Description: Provides 64 bit integer types for use in R.
 License: GPL (>= 2)
-Depends: methods
-Suggests: RUnit
+Suggests: 
+    knitr,
+    rmarkdown,
+    RUnit
+RoxygenNote: 7.2.3
+VignetteBuilder: knitr
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Imports: 
+    methods,
+    utils

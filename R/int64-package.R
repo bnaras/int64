@@ -126,18 +126,15 @@ NULL
 
 
 #' 64 bit integer types
-#' 
-#' 64 bit integer types
-#' 
-#' \tabular{ll}{ Package: \tab int64\cr Type: \tab Package\cr Version: \tab
-#' 1.1.2\cr Date: \tab 2011-12-01\cr License: \tab GPL (>= 2)\cr LazyLoad: \tab
-#' yes\cr }
+#'
+#' An implementation of 64-bit integer vectors for R.
 #' 
 #' @name int64-package
+#' @useDynLib int64, .registration = TRUE
+#' @import methods
 #' @docType package
-#' @author Romain Francois, Sponsored by Google Open Source Programs Office
-#' 
-#' Maintainer: Romain Francois <romain@@r-enthusiasts.com>
+#' @author Romain Francois, Sponsored by Google Open Source Programs Office, Balasubramanian Narasimhan
+#' Maintainer: Balasubramanian Narasimhan <naras@stanford.edu>
 #' @keywords package
 #' @examples
 #' 
@@ -145,9 +142,6 @@ NULL
 #'     as.int64( c("123456789", "9876543219876543" ) )
 #' 
 NULL
-
-
-
 
 
 #' Sorting 64 bits integer vector

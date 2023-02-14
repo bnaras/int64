@@ -56,6 +56,7 @@ void R_init_int64( DllInfo* info){
       NULL /* .Fortran */,
       NULL /*.External*/
   );
+  R_useDynamicSymbols(info, FALSE);
 }
         
 void R_unload_int64(DllInfo *info) {

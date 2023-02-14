@@ -37,9 +37,13 @@ namesgets_int64 <- function( x, value){
     }
     x    
 }
+
+#' @export
 setClass( "int64", contains = "list", 
     representation( NAMES = "maybeNames")
 )
+
+#' @export
 setClass( "uint64", contains = "list" ,
     representation( NAMES = "maybeNames")
 )
@@ -50,14 +54,18 @@ setMethod( "names", "uint64", names_int64 )
 setMethod( "names<-", "uint64", namesgets_int64 )
 
 
+#' @export
 setClass( "binary",  
     representation( data = "character", bits = "integer" )
 )
 
 setGeneric( "binary", function(object) standardGeneric("binary") )
+
+#' @exportMethod binary
 setMethod( "binary", "integer", function(object){
    new( "binary", data = .Call( int64_format_binary, object ), bits = 32L ) 
 } )
+
 setMethod( "binary", "numeric", function(object){
    new( "binary", data = .Call( int64_format_binary, object ), bits = 64L ) 
 } )
@@ -67,6 +75,8 @@ setMethod( "binary", "int64", function(object){
 setMethod( "binary", "uint64", function(object){
    new( "binary", data = .Call( int64_format_binary, object ), bits = 64L ) 
 } )
+
+#' @exportMethod show
 setMethod( "show", "binary", function(object){
     print( noquote( object@data ) )
     invisible(object)
@@ -123,6 +133,7 @@ uint64 <- function(length=0L){
     x
 }
 
+#' @exportMethod length
 setMethod( "length", "int64", function(x){
     length(x@.Data)
 } )
@@ -160,7 +171,7 @@ setMethod( "show", "uint64", show_int64)
 #' @author Romain Francois, sponsored by the Google Open Source Programs Office
 #' @seealso \code{\link{as.uint64}} for conversion to unsigned long vectors.
 #' @references C++ \code{atol} function:
-#' \url{http://www.cplusplus.com/reference/clibrary/cstdlib/atol/}
+#' \url{https://en.cppreference.com/w/c/string/byte/atoi}
 #' @keywords manip
 #' @examples
 #' 
@@ -192,7 +203,7 @@ as.int64 <- function(x){
 #' @author Romain Francois, sponsored by the Google Open Source Programs Office
 #' @seealso \code{\link{as.int64}} for conversion to signed long vectors.
 #' @references C++ \code{atol} function:
-#' \url{http://www.cplusplus.com/reference/clibrary/cstdlib/atol/}
+#' \url{https://en.cppreference.com/w/c/string/byte/atoi}
 #' @keywords manip
 #' @examples
 #' 
@@ -211,6 +222,7 @@ as.uint64 <- function(x){
     new( "uint64", .Call(int64_as_uint64, x) ) 
 }
 
+#' @exportMethod [
 setMethod( "[", "int64", function(x, i, j, ...){
     new( "int64", x@.Data[ i ] )
 } )
@@ -230,6 +242,7 @@ setMethod( "[<-", "uint64", function(x, i, j, ..., value ){
 
 
 
+#' @exportMethod Arith
 setMethod( "Arith", signature(e1 = "int64", e2 = "int64" ), 
 function(e1,e2){
    numbers <- .Call( int64_arith_int64_int64, .Generic, e1, e2, FALSE )
@@ -262,6 +275,7 @@ function(e1,e2){
    new( "uint64", numbers ) 
 } )
 
+#' @exportMethod Compare
 setMethod( "Compare", signature(e1 = "int64", e2 = "int64" ), 
 function(e1,e2){
    .Call( int64_compare_int64_int64, .Generic, e1, e2, FALSE )
@@ -289,6 +303,7 @@ function(e1,e2){
 } )
 
 
+#' @exportMethod Summary
 setMethod( "Summary", "int64", function(x,..., na.rm = FALSE){
    .Call( int64_summary_int64, .Generic, x, FALSE)
 } )
@@ -296,20 +311,36 @@ setMethod( "Summary", "uint64", function(x,..., na.rm = FALSE){
    .Call( int64_summary_int64, .Generic, x, TRUE)
 } )
 
-
+#' @exportMethod as.character
 setMethod( "as.character", "int64", function(x,...){
   .Call( int64_as_character_int64, x, FALSE)  
 })
 setMethod( "as.character", "uint64", function(x,...){
   .Call( int64_as_character_int64, x, TRUE)  
 })
-as.data.frame.int64 <- as.data.frame.uint64 <- as.data.frame.vector
+
+
+#' @method as.data.frame int64
+#' @export
+as.data.frame.int64 <- as.data.frame.vector
+
+#' @method as.data.frame uint64
+#' @export
+as.data.frame.uint64 <- as.data.frame.vector
+
+#' @method format int64
+#' @export
 format.int64 <- format.uint64 <- function(x, ...){
     as.character(x)   
 }
 
+#' @method format uint64
+#' @export
+format.uint64 <- format.int64
 
-
+#'
+#'
+#' 
 #' Give numeric limits of integer types
 #' 
 #' Give numeric limits of integer types
@@ -331,6 +362,7 @@ numeric_limits <- function( type ){
 }
 
 setGeneric( "unique" )
+#' @exportMethod unique
 setMethod( "unique", "int64", function(x, incomparables = FALSE, ...){
     new( "int64", .Data = unique( x@.Data, incomparables, ... ) )  
 } )
@@ -339,6 +371,8 @@ setMethod( "unique", "uint64", function(x, incomparables = FALSE, ...){
 } )
 
 setGeneric( "sort" )
+
+#' @exportMethod sort
 setMethod( "sort", "int64", function(x, decreasing = FALSE, ...){
     .Call( int64_sort, x, FALSE, decreasing )
 } )
@@ -346,6 +380,7 @@ setMethod( "sort", "uint64", function(x, decreasing = FALSE, ...){
     .Call( int64_sort, x, TRUE, decreasing )
 } )
 
+#' @exportMethod Math
 setMethod( "Math", "int64", function(x){
     .Call( int64_math, .Generic, x, FALSE)
 } )
@@ -375,6 +410,7 @@ int64_Math2 <- function( type = "int64", .Generic, x, digits ){
     }
 }
 
+#' @exportMethod Math2
 setMethod( "Math2", "int64", function(x, digits  = 6L){
     int64_Math2( "int64", .Generic, x, digits )
 } )
@@ -383,6 +419,7 @@ setMethod( "Math2", "uint64", function(x, digits = 6L){
 } )
 
 
+#' @exportMethod is.na
 setMethod( "is.na", "int64", function(x){
   .Call( int64_isna, x, FALSE )  
 })
@@ -412,6 +449,7 @@ c_int64 <- function(as, ctor){
 }
 
 
+#' @exportMethod c
 setMethod( "c", "int64", c_int64( as.int64, int64 ) )
 setMethod( "c", "uint64", c_int64( as.uint64, uint64 ) )
 
@@ -427,10 +465,15 @@ setAs("logical", "uint64", function(from) as.uint64(from))
 setAs("numeric", "int64", function(from) as.int64(from))
 setAs("numeric", "uint64", function(from) as.uint64(from))
 
+#' @importFrom utils head
+#' @method str int64
+#' @export
 str.int64 <- str.uint64 <- function(object, ...){
     writeLines( sprintf( " %s [1:%d] %s ...", class(object), length(object), 
-        paste( as.character( head( object, 3 ) ), collapse = " " )
+        paste( as.character( utils::head( object, 3 ) ), collapse = " " )
     ) )
 }
 
-
+#' @method str uint64
+#' @export
+str.uint64 <- str.int64
