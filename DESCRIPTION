@@ -12,7 +12,8 @@ License: GPL (>= 2)
 Suggests: 
     knitr,
     rmarkdown,
-    RUnit
+    RUnit,
+    tinytest
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 Encoding: UTF-8
