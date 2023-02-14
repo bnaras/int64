@@ -1,0 +1,43 @@
+2011-11-26  Romain Francois  <romain@r-enthusiasts.com>
+
+    * inst/include/int64/math.h: log method for [u]int64
+
+2011-11-26  Romain Francois  <romain@r-enthusiasts.com>
+
+    * R/int64.R: str and log10 methods for [u]int64 as requested by Hadley Wickham
+
+2011-11-23  Romain Francois  <romain@r-enthusiasts.com>
+
+    * inst/unitTests/runit.int64.R: testing read.csv
+
+2011-11-23  Romain Francois  <romain@r-enthusiasts.com>
+
+    * R/int64.R: implementing setAs so that read.csv can handle colClasses = "int64"
+    and "uint64". Suggestion from Gabor Grothendieck on R-devel
+    
+    * R/int64.R: show.[u]int64 did not handle zero length vectors correctly
+    
+    * man/int64.Rd: cross links with uint64.Rd
+    
+    * man/uint64.Rd: cross links with int64.Rd
+
+2011-11-06  Romain Francois  <romain@r-enthusiasts.com>
+
+    * R/int64.R: adding names and names<- to show 64 big integer vectors with
+    names
+
+2011-11-01  Romain Francois  <romain@r-enthusiasts.com>
+
+    * R/int64.R: implementation of sort for int64 and uint64
+    
+    * inst/include/int64/LongVector.h: LongVector<>::sort
+
+2011-11-01  Romain Francois  <romain@r-enthusiasts.com>
+
+    * R/int64.R: implementation of unique for int64 and uint64
+    
+    * man/unique-methods.Rd: documentation of the above
+    
+    * inst/unitTests/runit.int64.R: unit tests for unique
+
+

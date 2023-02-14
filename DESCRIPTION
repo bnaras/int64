@@ -1,0 +1,13 @@
+Package: int64
+Type: Package
+Title: 64 bit integer types
+Version: 1.2
+Date: 2023-02-13
+Authors@R: c(person("Romain", "Francois", role=c("aut", "cph"),
+	   	   email = "romain@rstudio.com"),
+             person("Balasubramanian", "Narasimhan", role=c("aut", "cre"),
+	   	   email = "naras@stanford.edu"))
+Description: 64 bit integer types
+License: GPL (>= 2)
+Depends: methods
+Suggests: RUnit
