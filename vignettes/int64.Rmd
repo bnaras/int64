@@ -14,7 +14,6 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r
 ```{r echo=FALSE}
 knitr::opts_chunk$set(
     message = FALSE,
@@ -44,8 +43,8 @@ to `R` for this purpose. The table below shows the limits of these
 types. 
 
 ```{r, echo = FALSE}
-d <- data.frame(a = c('int', 'int64_t', 'uint64_t'))
-d$b <- c('integer', 'int64', 'uint64')
+d <- data.frame(a = c('`int`', '`int64_t`', '`uint64_t`'))
+d$b <- c('`integer`', '`int64`', '`uint64`')
 d$c <- c(numeric_limits("integer")[1L], as.character(numeric_limits("int64")[1L]), as.character(numeric_limits("uint64")[1L]))
 d$d <- c(numeric_limits("integer")[2L], as.character(numeric_limits("int64")[2L]), as.character(numeric_limits("uint64")[2L]))
 names(d) <- c("C++ type", "R type", "min", "max")
